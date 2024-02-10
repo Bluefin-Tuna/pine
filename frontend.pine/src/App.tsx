@@ -1,11 +1,11 @@
 import './App.css'
-import inputForm from "./components/input.tsx";
+import Input from "./components/Input.tsx";
 
 function App() {
   //const [count, setCount] = useState(0)
 
   return (
-    inputForm()
+    <Input />
   )
 }
 

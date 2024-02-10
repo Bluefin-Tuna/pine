@@ -1,10 +1,10 @@
-import './input.css'
+import './Input.css'
 
 function checkInput(){
   
 }
 
-export default function inputForm() {
+export default function Input() {
     return (
       <div>
         <h1>
