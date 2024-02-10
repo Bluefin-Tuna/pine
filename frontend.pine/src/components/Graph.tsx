@@ -37,13 +37,14 @@ const orgChart = {
   ],
 };
 
-export default function OrgChartTree() {
+export default function Graph() {
   return (
-    <div id="tree-wrapper" style={{ width: '100vw', height: '100vh' }}>
+    <div id="graph-wrapper" style={{ width: '75vw', height: '100vh', borderColor: 'black', borderStyle: 'solid' }}>
       <Tree
         data={orgChart}
+        collapsible={false}
         onNodeClick={() => window.open("https://arxiv.org/abs/2203.16464")}
-        onNodeMouseOver={() => window.open("https://arxiv.org/abs/2203.16464")}
+        // onNodeMouseOver={() => window.open("https://arxiv.org/abs/2203.16464")}
       />
     </div>
   );
