@@ -1,4 +1,4 @@
 Flask==2.2.5
 Flask_PyMongo==2.3.0
 Requests==2.31.0
-
+octoai-sdk==0.9.0
