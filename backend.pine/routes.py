@@ -7,6 +7,7 @@ bp = Blueprint('papers', __name__)
 @bp.route('/', methods=['GET'])
 def get_papers():
     # Implement logic to retrieve papers from the database
+    return None
     pass
 
 @bp.route('/add', methods=['POST'])
