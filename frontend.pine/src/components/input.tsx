@@ -1,3 +1,9 @@
+import './input.css'
+
+function checkInput(){
+  
+}
+
 export default function inputForm() {
     return (
       <div>
@@ -8,9 +14,8 @@ export default function inputForm() {
           Your papers, organized
         </h3>
         <div className="inputDiv">
-          <input name="arxivLink" placeholder="Arxiv link:"/>
-          {"\n"}
-          <button>Continue</button>
+          <input name="arxivLink" className="arxivLink" placeholder="ArXiv Link:"/>
+          <button className="inputButton" onClick={checkInput}>Continue</button>
         </div>
       </div>
     );
