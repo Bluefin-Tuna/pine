@@ -1,16 +1,20 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Entry from './components/Entry.tsx';
+import Main from './components/Main.tsx';
 import './App.css'
-import Input from './components/Input.tsx';
-import Graph from "./components/Graph.tsx";
-import Metadata from './components/Metadata.tsx';
+
 
 function App() {
   //const [count, setCount] = useState(0)
 
   return (
     <div className="wrapper">
-      <Input />
-      {/* <Metadata /> */}
-      {/* <Graph /> */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" Component={ Entry } />
+          <Route path="/graph" Component={ Main }/>
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }

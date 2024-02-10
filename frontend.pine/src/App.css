@@ -40,9 +40,3 @@
 .read-the-docs {
   color: #888;
 } */
-
-.wrapper {
-  display: flex; /* Enables Flexbox layout */
-  justify-content: space-between; /* Spreads the children with space between */
-  align-items: start; /* Aligns items to start from the top */
-}

@@ -1,12 +1,12 @@
-import './Input.css'
+import './Entry.css'
 
 function sendInput(){
   
 }
 
-export default function Input() {
+export default function Entry() {
     return (
-      <div>
+      <div className="entry-wrapper">
         <h1>
           Pine
         </h1>

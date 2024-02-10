@@ -1,4 +1,4 @@
-#root {
+.entry-wrapper {
   font-family: Inter, sans-serif;
   max-width: 1000px;
   margin: 0 auto;
@@ -35,9 +35,12 @@ button:hover {
 }
 
 .arxivLink{
-    width: 50%;
-    height: 30px;
+    /* width: 50%;
+    height: 30px; */
     align-items: center;
     position: relative;
 }
 
+.entry-wrapper {
+
+}
