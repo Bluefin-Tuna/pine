@@ -3,54 +3,97 @@ import requests
 from xml.etree import ElementTree
 
 from octoai.client import Client
+ss_api_key = '9RgMpk4pid9xVnigSzo5SaQWq5nb202J7turPVPQ'
+
+def fetch_paper_details(title):
+    # URL for Semantic Scholar's paper search endpoint
+    search_url = 'https://api.semanticscholar.org/graph/v1/paper/search'
+
+    # Prepare headers with the API key
+    headers = {
+        'x-api-key': ss_api_key
+    }
+
+    # Set up search parameters
+    params = {
+        'query': title,
+        'limit': 1,  # Assuming the first result is the most relevant
+        'fields': 'title,abstract,authors,paperId'  # Specify the details you want to fetch
+    }
+
+    # Make the GET request to the Semantic Scholar search endpoint with the header
+    response = requests.get(search_url, headers=headers, params=params)
+
+    paper_details = {}
+
+    if response.status_code == 200:
+        # Parse the JSON response
+        data = response.json()
+        results = data.get('data', [])
+        if results:
+            # Assuming the first result is the most relevant
+            result = results[0]
+            paper_details['title'] = result.get('title')
+            paper_details['abstract'] = result.get('abstract')
+            paper_details['authors'] = [author['name'] for author in result.get('authors', [])]
+            paper_details['uri'] = f"https://www.semanticscholar.org/paper/{result.get('paperId')}"
+            print("Paper Details:", paper_details)
+        else:
+            print("No paper found matching the title.")
+    else:
+        # If the response code is not 200, print the error
+        print(f"Error fetching data: HTTP {response.status_code} - {response.reason}")
+
+    return paper_details
+
+def find_similar_papers_by_title(parent_title, num_papers):
+    # URL for Semantic Scholar's paper search endpoint
+    search_url = 'https://api.semanticscholar.org/graph/v1/paper/search'
+
+    # Prepare headers with the API key
+    headers = {'x-api-key': ss_api_key}
+
+    # Set up search parameters
+    params = {
+        'query': parent_title,
+        'limit': num_papers,  # Adjust based on how many similar papers you want to find
+        'fields': 'title,authors,abstract,paperId'
+    }
+
+    # Perform the search request
+    response = requests.get(search_url, headers=headers, params=params)
+
+    if response.status_code == 200:
+        results = response.json().get('data', [])
+        similar_papers = []
+        for result in results:
+            paper = {}
+            paper['title'] = result.get('title')
+            paper['abstract'] = result.get('abstract')
+            paper['authors'] = [author['name'] for author in result.get('authors', [])]
+            paper['uri'] = f"https://www.semanticscholar.org/paper/{result.get('paperId')}"
+            similar_papers.append(paper)
+
+        return similar_papers
+    else:
+        print(f"Failed to fetch similar papers: HTTP {response.status_code} - {response.reason}")
+        return []
 
 
-def parse_xml_metadata(xml_data):
-    """Parse XML data to extract author names, paper title, and summary."""
-    ns = {'atom': 'http://www.w3.org/2005/Atom'}  # Define namespace for XML parsing
-    root = ElementTree.fromstring(xml_data)
-
-    # Initialize the dictionary to hold the extracted information
-    paper_info = {'authors': [], 'title': None, 'summary': None}
-
-    # Extract the title and summary
-    paper_info['title'] = root.find('atom:entry/atom:title', ns).text.strip()
-    paper_info['summary'] = root.find('atom:entry/atom:summary', ns).text.strip()
-
-    # Extract author names
-    authors = root.findall('atom:entry/atom:author/atom:name', ns)
-    for author in authors:
-        paper_info['authors'].append(author.text)
-
-    return paper_info
-
-
-def fetch_arxiv_metadata(arxiv_id):
-    # fetch paper metadata from the arXiv API and parse it.
-    arxiv_api_url = f'http://export.arxiv.org/api/query?id_list={arxiv_id}'
-    try:
-        response = requests.get(arxiv_api_url)
-        response.raise_for_status()
-        return parse_xml_metadata(response.text)
-    except requests.RequestException as e:
-        print(f"Request failed: {e}")
-        return None
-
-
-def fetch_and_store_paper(arxiv_id, parent_id=None, connection=None):
+def fetch_and_store_paper(paper_name, parent_id=None, connection=None):
     # Fetch a paper's metadata from arXiv, parse it, and store it in MongoDB along with
     # information about its parent paper and the connection to it.
     from app import mongo
     # Fetch paper metadata from the arXiv API and parse it.
 
-    metadata = fetch_arxiv_metadata(arxiv_id)
+    metadata = fetch_paper_details(paper_name)
     if metadata:
         # Store the paper's metadata along with parent and connection information in MongoDB
         paper_document = {
-            "arxiv_id": arxiv_id,
             "title": metadata['title'],
+            "abstract": metadata['abstract'],
             "authors": metadata['authors'],
-            "summary": metadata['summary'],
+            "uri": metadata['uri'],
             "parent": parent_id,  # Store the parent ID
             "connection": connection,  # Store the connection description
         }
@@ -89,5 +132,7 @@ def generate_connection(a1, a2):
     content = completion.dict()['choices'][0]['message']['content'].strip()
     return content
 
+
+#def add_children(parent_title):
 
 

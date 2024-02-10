@@ -29,8 +29,8 @@ def get_paper(id):
 @bp.route('/add', methods=['POST'])
 def add_paper():
     data = request.json
-    arxiv_id = data.get('arxiv_id')
-    result = fetch_and_store_paper(arxiv_id)
+    paper_name = data.get('paper_name')
+    result = fetch_and_store_paper( paper_name)
     return jsonify(result)
 
 # Add more routes as needed
