@@ -41,6 +41,7 @@ def fetch_and_store_paper(arxiv_id, parent_id=None, connection=None):
     # information about its parent paper and the connection to it.
     from app import mongo
     # Fetch paper metadata from the arXiv API and parse it.
+
     metadata = fetch_arxiv_metadata(arxiv_id)
     if metadata:
         # Store the paper's metadata along with parent and connection information in MongoDB
@@ -57,4 +58,32 @@ def fetch_and_store_paper(arxiv_id, parent_id=None, connection=None):
     else:
         return {"message": "Failed to fetch paper metadata"}
 
-#def generate_connection(paper1, paper2):
+
+def generate_connection(a1, a2):
+    from octoai.client import Client
+
+    client = Client(
+        token="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjNkMjMzOTQ5In0.eyJzdWIiOiI5MDdiYWZlNy0xNDkxLTRkODgtOTczZS0zZDQ5MjgyZDk0NGUiLCJ0eXBlIjoidXNlckFjY2Vzc1Rva2VuIiwidGVuYW50SWQiOiI3YjJkYmNkOC02ZDRlLTQxNzAtYTUyOC00ODkyN2JiNjQyZWQiLCJ1c2VySWQiOiI1MTFkY2VkMC04MTgwLTQ1N2YtYTUyZC00YzI0NTA1YThiMWUiLCJyb2xlcyI6WyJGRVRDSC1ST0xFUy1CWS1BUEkiXSwicGVybWlzc2lvbnMiOlsiRkVUQ0gtUEVSTUlTU0lPTlMtQlktQVBJIl0sImF1ZCI6IjNkMjMzOTQ5LWEyZmItNGFiMC1iN2VjLTQ2ZjYyNTVjNTEwZSIsImlzcyI6Imh0dHBzOi8vaWRlbnRpdHkub2N0b21sLmFpIiwiaWF0IjoxNzA3NTkxNjg4fQ.PdRBN1PzrFyPMrtQUwT47zIOwn9so-hXOOPSJFJ3hTWQ1DzwBeqB18RnhtFafcXkmOEN2Sgz5DRLIKgoKuQT5yD8jHShnLSFRMRHmcBd7_xJO803YTWteLM1RJRs3rXJUrsYgpsu5c1OOQakzpO4Ox9uXekMmi0TOELZo7Zjl1uP52wzlS0TsN6jL-3SeXnrbfMkuSUQSQRdglcdcBNQq8zTD7GjyAOV5V-zNsGiwD9HrEV-o39scGLIeOlOBp4wcfDsKA65lcKz-HOv4-gefmEXfXGk58VXw9S47bnNDQ2Nh0Jpf0pn560Qh6FiYyPCKBkRP9ofz-NkAFNQ9i0zVw")
+
+    completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "system",
+                "content": "Just read paper 1. Based on abstract 1, give 10 word description on how it relates ("
+                           "varying perspective, smilar topic, etc) to abstract2. EXAMPLE: Expands on x topic. "
+                           "EXAMPLE: Disputes x claim. EXAMPLE: Dives deeper into x topic."
+            },
+            {
+                "role": "user",
+                "content": "abstract1: " + a1 + ", abstract2: " + a2
+            }
+        ],
+        model="llama-2-70b-chat-fp16",
+        max_tokens=100,
+        presence_penalty=0,
+        temperature=0.1,
+        top_p=0.9,
+    )
+
+    content = completion.dict()['choices'][0]['message']['content'].strip()
+    return content

@@ -21,7 +21,7 @@ completion = client.chat.completions.create(
     messages=[
         {
             "role": "system",
-            "content": "Just read paper 1. Based on abstract 1, give 10 word description on how it relates (varying perspective, smilar topic, etc) to abstract2.  EXAMPLE: Expands on x topic. EXAMPLE: Disputes x claim. EXAMPLE: Dives deeper into x topic."
+            "content": "Just read paper 1. Based on abstract 1, give 10 word description on how it relates (varying perspective, smilar topic, etc) to abstract2. EXAMPLE: Expands on x topic. EXAMPLE: Disputes x claim. EXAMPLE: Dives deeper into x topic."
         },
         {
             "role": "user",
@@ -35,4 +35,5 @@ completion = client.chat.completions.create(
     top_p=0.9,
 )
 
-print(completion)
+content = completion.dict()['choices'][0]['message']['content'].strip()
+print(content)
