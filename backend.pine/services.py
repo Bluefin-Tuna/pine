@@ -2,7 +2,6 @@
 import requests
 from xml.etree import ElementTree
 
-from crossref.restful import Works
 from octoai.client import Client
 
 
