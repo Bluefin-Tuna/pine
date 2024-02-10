@@ -4,11 +4,16 @@ from services import fetch_and_store_paper
 
 bp = Blueprint('papers', __name__)
 
-@bp.route('/', methods=['GET'])
+@bp.route('/')
+def hello_world():
+    # Implement logic to retrieve papers from the database
+    return "Hello World"
+
+@bp.route('/get', methods=['ADD'])
 def get_papers():
     # Implement logic to retrieve papers from the database
-    return None
     pass
+
 
 @bp.route('/add', methods=['POST'])
 def add_paper():
