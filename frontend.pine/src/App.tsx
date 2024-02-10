@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="wrapper">
       <Input />
-      {/* <Graph /> */}
+      {<Graph />}
     </div>
   )
 }

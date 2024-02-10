@@ -1,6 +1,6 @@
 import './Input.css'
 
-function checkInput(){
+function sendInput(){
   
 }
 
@@ -15,7 +15,7 @@ export default function Input() {
         </h3>
         <div className="inputDiv">
           <input name="arxivLink" className="arxivLink" placeholder="ArXiv Link:"/>
-          <button className="inputButton" onClick={checkInput}>Continue</button>
+          <button className="inputButton" onClick={sendInput}>Continue</button>
         </div>
       </div>
     );

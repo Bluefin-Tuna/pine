@@ -1,0 +1,43 @@
+#root {
+  font-family: Inter, sans-serif;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    /*min-width: 320px;*/
+    min-height: 100vh;
+}
+
+.inputDiv {
+    place-items: center;
+    box-sizing: border-box;
+}
+
+.inputButton {
+    width: 50%;
+    color: black;
+    background-color: #BFFF6D;
+    align-items: center;
+    margin-top: 10px;
+    position: relative;
+    padding: 0;
+
+}
+
+button:hover {
+    border-color: #646cff;
+}
+
+.arxivLink{
+    width: 50%;
+    height: 30px;
+    align-items: center;
+    position: relative;
+}
+
