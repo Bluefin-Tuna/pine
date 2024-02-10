@@ -1,6 +1,8 @@
 # services.py
 import requests
 from xml.etree import ElementTree
+
+from crossref.restful import Works
 from octoai.client import Client
 
 
@@ -87,3 +89,5 @@ def generate_connection(a1, a2):
 
     content = completion.dict()['choices'][0]['message']['content'].strip()
     return content
+
+
