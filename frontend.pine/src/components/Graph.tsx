@@ -1,9 +1,11 @@
 import React, { Component, useState } from 'react';
 import Tree from 'react-d3-tree';
 import clone from 'clone';
+import './Graph.css'
 
 
 const cleanData = (data: any) => {
+    console.log(data)
     const name = data.data.title.length > 10 ? `${data.data.title.substring(0, 10)}...` : data.data.title;
     return {
         uuid: data.data._id,
@@ -12,7 +14,8 @@ const cleanData = (data: any) => {
         authors: data.data.authors,
         abstract: data.data.abstract,
         uri: data.data.uri,
-        children: []
+        children: [],
+        connection: data.data.connection
     }
 }
 
@@ -60,8 +63,8 @@ export default function Graph({ data, onNodeHover }: { data: any, onNodeHover: (
       findAndAddChildren(clonedTreeData);
       setTreeData(clonedTreeData);
     }
-    if (nodeDatum.uri) {
-      window.open(nodeDatum.uri);
+    if (nodeDatum.data.uri) {
+      window.open(nodeDatum.data.uri);
     }
     // return true;
   };
@@ -77,6 +80,8 @@ export default function Graph({ data, onNodeHover }: { data: any, onNodeHover: (
         collapsible={false}
         onNodeClick={handleNodeClick}
         onNodeMouseOver={handleNodeMouseOver}
+        // branchNodeClassName="node__branch"
+        // leafNodeClassName="node__leaf"
       />
     </div>
   );

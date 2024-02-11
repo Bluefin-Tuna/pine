@@ -4,3 +4,11 @@
     width: 75vw !important;
     height: 100vw !important;
 }
+
+.node__leaf > circle {
+    fill: green;
+}
+
+.node__branch > circle {
+    fill: yellow;
+}

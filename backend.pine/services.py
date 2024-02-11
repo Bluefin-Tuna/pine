@@ -130,15 +130,14 @@ def generate_connection(a1, a2):
             {
                 "role": "system",
                 "content": "Just read paper 1. Based on abstract 1, give 10 word description on how it relates ("
-                "varying perspective, smilar topic, etc) to abstract2. EXAMPLE: Expands on x topic. "
-                "EXAMPLE: Disputes x claim. EXAMPLE: Dives deeper into x topic.",
+                "varying perspective, smilar topic, etc) to abstract2."
             },
             {"role": "user", "content": "abstract1: " + a1 + ", abstract2: " + a2},
         ],
         model="llama-2-70b-chat-fp16",
         max_tokens=100,
         presence_penalty=0,
-        temperature=0.1,
+        temperature=0.5,
         top_p=0.9,
     )
 

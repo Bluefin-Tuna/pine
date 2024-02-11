@@ -6,8 +6,9 @@ export default function Metadata({ data }: { data: any }) {
     if (!data) return <div className="sidebar-wrapper">Hover over a node to see details here.</div>;
     return (
         <div className="sidebar-wrapper">
-            <h2>{data.data.title}</h2>
-            <p>{data.data.authors.join(', ')}</p>
+            <h1>{data.data.title}</h1>
+            <h2>{data.data.authors.join(', ')}</h2>
+            {data.data.connection && <h3>{data.data.connection}</h3>}
             <p>{data.data.abstract}</p>
         </div>
     );
