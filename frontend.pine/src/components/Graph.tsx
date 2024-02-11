@@ -5,7 +5,7 @@ import './Graph.css'
 
 const cleanData = (data: any) => {
     console.log(data)
-    const name = data.data.title.length > 10 ? `${data.data.title.substring(0, 10)}...` : data.data.title;
+    const name = data.data.title.length > 15 ? `${data.data.title.substring(0, 15)}...` : data.data.title;
     return {
         uuid: data.data._id,
         name: name,

@@ -10,10 +10,23 @@
     font-family: 'Roboto', sans-serif; /* Consistent typography */
 }
 
-.sidebar-wrapper h2 {
+.sidebar-wrapper h1 {
     color: #111827; /* Darker color for the title */
     margin-bottom: 1rem; /* Space below the title */
     font-size: 1.5rem; /* Larger font size for the title */
+}
+
+.sidebar-wrapper h2 {
+    color: #111827; /* Darker color for the title */
+    margin-bottom: 1.8rem; /* Space below the title */
+    font-weight: 400;
+    font-size: 1.1em; /* Larger font size for the title */
+}
+
+.sidebar-wrapper h3 {
+    color: #210aed; /* Darker color for the title */
+    margin-bottom: 1rem; /* Space below the title */
+    font-size: 0.9rem; /* Larger font size for the title */
 }
 
 .sidebar-wrapper p {

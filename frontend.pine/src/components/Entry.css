@@ -47,8 +47,8 @@ body {
 
 .inputButton {
     font-weight: bold; /* Make the font bold */
-    color: black;
-    background-color: #BFFF6D; /* A vibrant green for the button */
+    color: white;
+    background-color: #2563eb; /* A vibrant green for the button */
     border: none; /* No border for a cleaner look */
     cursor: pointer;
     border-radius: 20px; /* Highly rounded corners for the button */
@@ -57,7 +57,7 @@ body {
 }
 
 .inputButton:hover {
-    background-color: #aede56; /* A darker shade on hover for feedback */
+    background-color: #0f3a99; /* A darker shade on hover for feedback */
     text-align: center;
     justify-content: center;
 }
