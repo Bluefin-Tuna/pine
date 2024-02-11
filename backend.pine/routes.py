@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, abort
 from bson.objectid import ObjectId
 from services import fetch_and_store_paper
+from services import add_children
 
 bp = Blueprint('papers', __name__)
 
@@ -20,6 +21,13 @@ def get_paper(id):
 
     # No need to convert _id to string, as it's already a string
     return jsonify(paper)
+
+@bp.route('/add-children', methods=['POST'])
+def addchildren():
+    data = request.json
+    uuid = data.get('uuid')
+    result = add_children(uuid)
+    return jsonify(result)
 
 
 @bp.route('/add', methods=['POST'])
