@@ -4,8 +4,6 @@ import { useLocation } from 'react-router-dom';
 import './Main.css'
 import { useState } from "react";
 
-
-
 export default function Main() {
     const location = useLocation();
     const data = location.state?.metadata; // Access passed data
