@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '/Users/ayushpai/Documents/GitHub/pine/frontend.pine/src/assets/pineroot-modified.png'; // Adjust the path to your logo
+import logo from './../assets/pineroot-modified.png'; // Adjust the path to your logo
 import './Entry.css';
 
 export default function Entry() {
