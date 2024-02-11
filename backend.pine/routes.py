@@ -20,21 +20,27 @@ def get_paper(id):
         return abort(404, description="Paper not found")
 
     # No need to convert _id to string, as it's already a string
-    return jsonify(paper)
+    response = jsonify(paper)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 @bp.route('/add-children', methods=['POST'])
 def addchildren():
     data = request.json
     uuid = data.get('uuid')
     result = add_children(uuid)
-    return jsonify(result)
+    response = jsonify(result)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 
 @bp.route('/add', methods=['POST'])
 def add_paper():
-    data = request.json
+    data = request.get_json(force=True)
     paper_name = data.get('paper_name')
     result = fetch_and_store_paper(paper_name)
-    return jsonify(result)
+    response = jsonify(result)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 # Add more routes as needed
