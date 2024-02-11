@@ -1,19 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component, useState } from 'react';
 import Tree from 'react-d3-tree';
 import clone from 'clone';
 
+
 const constructInitialData = (data: any) => {
-  console.log("Data", data);
-  const name = data.data.data.title.length > 10 ? `${data.data.data.title.substring(0, 10)}...` : data.data.data.title;
-  return {
-    uuid: data.data.data.id,
-    name: name,
-    title: data.data.data.title,
-    authors: data.data.data.authors,
-    abstract: data.data.data.abstract,
-    uri: data.data.data.uri,
-    children: [] // Ensure children is set to null initially
-  }
+    console.log("Data", data);
+    const name = data.data.title.length > 10 ? `${data.data.title.substring(0, 10)}...` : data.data.title;
+    return {
+        uuid: data.data.id,
+        name: name,
+        title: data.data.title,
+        authors: data.data.authors,
+        abstract: data.data.abstract,
+        uri: data.data.uri,
+        connection: null
+    }
+}
+
+const handleNodeClick = (nodeDatum: any, event: any) => {
+    console.log("Node", nodeDatum)
+    window.open(nodeDatum.data.uri);
+
 }
 
 // Function to fetch children for a node
