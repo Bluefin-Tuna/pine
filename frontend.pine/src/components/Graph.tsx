@@ -28,7 +28,7 @@ const handleNodeClick = (nodeDatum: any, event: any) => {
 const fetchChildren = async (nodeId: any) => {
   console.log(nodeId);
   try {
-    const response = await fetch(`YOUR_BACKEND_ENDPOINT/${nodeId}`, { mode: "no-cors" });
+    const response = await fetch(`http://127.0.0.1:5000/get/676fa037866f4fb397a280cd1fdf57a5`, { mode: "no-cors" });
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }

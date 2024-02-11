@@ -3,17 +3,19 @@ from bson.objectid import ObjectId
 from services import fetch_and_store_paper
 from services import add_children
 
-bp = Blueprint('papers', __name__)
+bp = Blueprint("papers", __name__)
 
-@bp.route('/')
+
+@bp.route("/")
 def hello_world():
     # Implement logic to retrieve papers from the database
     return "Hello World"
 
 
-@bp.route('/get/<id>', methods=['GET'])
+@bp.route("/get/<id>", methods=["GET"])
 def get_paper(id):
     from app import mongo
+
     # Directly use the id string to query the document, as _id is now a string
     paper = mongo.db.papers.find_one({"_id": id})
     if not paper:
@@ -24,23 +26,25 @@ def get_paper(id):
     # response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-@bp.route('/add-children', methods=['POST'])
+
+@bp.route("/add-children", methods=["GET"])
 def addchildren():
     data = request.json
-    uuid = data.get('uuid')
+    uuid = data.get("uuid")
     result = add_children(uuid)
     response = jsonify(result)
-    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add("Access-Control-Allow-Origin", "*")
     return response
 
 
-@bp.route('/add', methods=['POST'])
+@bp.route("/add", methods=["POST"])
 def add_paper():
     data = request.get_json(force=True)
-    paper_name = data.get('paper_name')
+    paper_name = data.get("paper_name")
     result = fetch_and_store_paper(paper_name)
     response = jsonify(result)
-    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add("Access-Control-Allow-Origin", "*")
     return response
+
 
 # Add more routes as needed
