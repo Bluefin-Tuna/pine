@@ -1,63 +1,75 @@
+/* Global styles */
 body {
     margin: 0;
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
     min-height: 100vh;
-    
-    background-color: #f0f0f0; /* A soft background color for minimalistic design */
+    background-color: #f0f0f0;
 }
 
-    .entry-wrapper {
-        font-family: 'Roboto', sans-serif;
-        width: 80%; /* Further increase the width for a larger presence */
-        max-width: 1400px; /* Increase the maximum width for a bigger entry wrapper */
-        margin: 0 auto;
-        padding: 2.5rem; /* Increase padding for more internal space */
-        text-align: center;
-        justify-content: center;
-        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1); /* A subtle shadow for depth */
-        background-color: #ffffff; /* A clean, white background */
-        border-radius: 10px; /* Soften the edges a bit more */
-    }
-
-.inputDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
+/* Styles for the entry wrapper */
+.entry-wrapper {
+    font-family: 'Roboto', sans-serif;
+    width: 80%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3.5rem;
     text-align: center;
-    justify-content: center;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 50px;
 }
 
-.paperInput, .inputButton {
-    width: 90%; /* Keep the width to accommodate longer paper names */
-    padding: 15px; /* Slightly more padding for a larger touch area */
-    margin-top: 15px; /* Increase space between input and button */
-    border-radius: 5px; /* Rounded corners for the input field */
+/* Styling for the logo */
+.entry-logo {
+    max-width: 200px; /* Adjust based on your logo's size */
+    margin-bottom: 0.2rem; /* Space between the logo and the title */
+    display: block; /* Ensure it's block level for margin to work */
+    margin-left: auto; /* Center-align the logo */
+    margin-right: auto;
+}
+
+/* Individual element styling */
+.entry-title {
+    margin-top: 0px;
+    font-size: 3rem; /* Example size, adjust as needed */
+    margin-bottom:-30px;
+}
+
+.entry-subtitle {
+    font-size: 1.5rem;
+    color: #666;
+}
+
+/* Adjusted for specificity and individual control */
+.entry-wrapper .inputDiv {
+    margin-top: 50px;
+}
+
+.entry-wrapper .inputDiv .paperInput,
+.entry-wrapper .inputDiv .inputButton {
+    width: 90%;
+    padding: 15px;
+    margin-top: 15px;
     margin-bottom: 40px;
-    
+    border-radius: 10px;
 }
 
-.paperInput {
-    border: 1px solid #ccc; /* A light border for distinction */
-    background-color: #f9f9f9; /* A slightly off-white background for the input field */
-    
+.entry-wrapper .inputDiv .paperInput {
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
 }
 
-.inputButton {
-    font-weight: bold; /* Make the font bold */
-    color: white;
-    background-color: #2563eb; /* A vibrant green for the button */
-    border: none; /* No border for a cleaner look */
+.entry-wrapper .inputDiv .inputButton {
+    font-weight: bold;
+    color: black;
+    background-color: #ffd8b1;
+    border: none;
     cursor: pointer;
-    border-radius: 20px; /* Highly rounded corners for the button */
-    text-align: center;
-    justify-content: center;
+    border-radius: 20px;
 }
 
-.inputButton:hover {
-    background-color: #0f3a99; /* A darker shade on hover for feedback */
-    text-align: center;
-    justify-content: center;
+.entry-wrapper .inputDiv .inputButton:hover {
+    background-color: #d8bfa4;
 }

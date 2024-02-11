@@ -1,14 +1,51 @@
-.graph-wrapper {
+/* Styles for the graph-wrapper with a new background color */
+#graph-wrapper {
     border-color: black;
     border-style: solid;
-    width: 75vw !important;
-    height: 100vw !important;
+    width: 75vw;
+    height: 100vh;
+    background: #e4dad0; /* This is the new background color */
+    /* Rest of your styles for #graph-wrapper */
+    position: relative; /* for absolute positioning of child elements */
 }
 
+/* Styles for the nodes of the tree */
 .node__leaf > circle {
-    fill: green;
+    fill: green; /* Leaf nodes are green */
 }
 
 .node__branch > circle {
-    fill: yellow;
+    fill: yellow; /* Branch nodes are yellow */
+}
+
+/* Styles for the loading spinner */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top-color: #7eb110; /* Spinner color */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+}
+
+/* Styles for the loading wrapper that contains the spinner and text */
+.loading-wrapper {
+    position: absolute; /* Absolute positioning within #graph-wrapper */
+    display: flex; /* Align spinner and text horizontally */
+    align-items: center; /* Center items vertically */
+    padding: 20px; /* Padding around the loading-wrapper contents */
+    z-index: 100; /* Ensure it appears above other content */
+}
+
+/* Styles for the loading text adjacent to the spinner */
+.loading-text {
+    color: #333; /* Text color */
+    margin-left: 10px; /* Space between the spinner and the text */
+    font-size: 16px; /* Text size */
+}
+
+/* Keyframes for the spinning animation of the spinner */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

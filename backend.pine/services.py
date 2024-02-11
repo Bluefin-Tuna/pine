@@ -129,8 +129,8 @@ def generate_connection(a1, a2):
         messages=[
             {
                 "role": "system",
-                "content": "Just read paper 1. Based on abstract 1, give 10 word description on how it relates ("
-                "varying perspective, smilar topic, etc) to abstract2."
+                "content": "I just read paper 1. Based on abstract 1, give 10 word description on how it relates ("
+                "varying perspective, smilar topic, etc) to abstract2. FOLLOW FORMAT: Expands more on [theory].",
             },
             {"role": "user", "content": "abstract1: " + a1 + ", abstract2: " + a2},
         ],
@@ -195,6 +195,7 @@ def add_children(parent_uuid):
         )
         added_children.append(n)
 
-    if len(added_children) > 1: added_children = [ac for ac in added_children if ac["title"] != parent_title]
+    if len(added_children) > 1:
+        added_children = [ac for ac in added_children if ac["title"] != parent_title]
 
     return added_children if added_children else parent_details
