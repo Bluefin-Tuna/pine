@@ -3,7 +3,9 @@ import requests
 from xml.etree import ElementTree
 
 from octoai.client import Client
+
 ss_api_key = '9RgMpk4pid9xVnigSzo5SaQWq5nb202J7turPVPQ'
+
 
 def fetch_paper_details(title):
     # URL for Semantic Scholar's paper search endpoint
@@ -46,6 +48,7 @@ def fetch_paper_details(title):
 
     return paper_details
 
+
 def find_similar_papers_by_title(parent_title, num_papers):
     # URL for Semantic Scholar's paper search endpoint
     search_url = 'https://api.semanticscholar.org/graph/v1/paper/search'
@@ -81,24 +84,25 @@ def find_similar_papers_by_title(parent_title, num_papers):
 
 
 def fetch_and_store_paper(paper_name, parent_id=None, connection=None):
-    # Fetch a paper's metadata from arXiv, parse it, and store it in MongoDB along with
-    # information about its parent paper and the connection to it.
+    import uuid
     from app import mongo
-    # Fetch paper metadata from the arXiv API and parse it.
-
     metadata = fetch_paper_details(paper_name)
     if metadata:
+        # Generate a unique string ID, here using uuid4 and converting to a string
+        unique_string_id = str(uuid.uuid4()).replace('-', '')
+
         # Store the paper's metadata along with parent and connection information in MongoDB
         paper_document = {
+            "_id": unique_string_id,  # Manually assign the _id as a unique string
             "title": metadata['title'],
             "abstract": metadata['abstract'],
             "authors": metadata['authors'],
             "uri": metadata['uri'],
-            "parent": parent_id,  # Store the parent ID
-            "connection": connection,  # Store the connection description
+            "parent": parent_id,
+            "connection": connection,
         }
         mongo.db.papers.insert_one(paper_document)
-        return {"message": "Paper stored successfully", "paper_id": str(paper_document['_id'])}
+        return {"message": "Paper stored successfully", "paper_id": paper_document['_id']}
     else:
         return {"message": "Failed to fetch paper metadata"}
 
@@ -132,7 +136,4 @@ def generate_connection(a1, a2):
     content = completion.dict()['choices'][0]['message']['content'].strip()
     return content
 
-
-#def add_children(parent_title):
-
-
+# def add_children(parent_uuid):

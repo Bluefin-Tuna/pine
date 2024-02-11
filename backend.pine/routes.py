@@ -13,16 +13,12 @@ def hello_world():
 @bp.route('/get/<id>', methods=['GET'])
 def get_paper(id):
     from app import mongo
-    try:
-        obj_id = ObjectId(id)
-    except:
-        return abort(400, description="Invalid paper ID format")
-
-    paper = mongo.db.papers.find_one({"_id": obj_id})
+    # Directly use the id string to query the document, as _id is now a string
+    paper = mongo.db.papers.find_one({"_id": id})
     if not paper:
         return abort(404, description="Paper not found")
 
-    paper['_id'] = str(paper['_id'])
+    # No need to convert _id to string, as it's already a string
     return jsonify(paper)
 
 
@@ -30,7 +26,7 @@ def get_paper(id):
 def add_paper():
     data = request.json
     paper_name = data.get('paper_name')
-    result = fetch_and_store_paper( paper_name)
+    result = fetch_and_store_paper(paper_name)
     return jsonify(result)
 
 # Add more routes as needed
