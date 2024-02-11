@@ -1,29 +1,33 @@
 body {
     margin: 0;
     display: flex;
-    justify-content: center;
+    justify-content:center;
     align-items: center;
     min-height: 100vh;
+    
     background-color: #f0f0f0; /* A soft background color for minimalistic design */
 }
 
-.entry-wrapper {
-    font-family: 'Roboto', sans-serif;
-    width: 95%; /* Further increase the width for a larger presence */
-    max-width: 1400px; /* Increase the maximum width for a bigger entry wrapper */
-    margin: 0 auto;
-    padding: 3rem; /* Increase padding for more internal space */
-    text-align: center;
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1); /* A subtle shadow for depth */
-    background-color: #ffffff; /* A clean, white background */
-    border-radius: 10px; /* Soften the edges a bit more */
-}
+    .entry-wrapper {
+        font-family: 'Roboto', sans-serif;
+        width: 80%; /* Further increase the width for a larger presence */
+        max-width: 1400px; /* Increase the maximum width for a bigger entry wrapper */
+        margin: 0 auto;
+        padding: 2.5rem; /* Increase padding for more internal space */
+        text-align: center;
+        justify-content: center;
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1); /* A subtle shadow for depth */
+        background-color: #ffffff; /* A clean, white background */
+        border-radius: 10px; /* Soften the edges a bit more */
+    }
 
 .inputDiv {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
+    text-align: center;
+    justify-content: center;
 }
 
 .paperInput, .inputButton {
@@ -32,11 +36,13 @@ body {
     margin-top: 15px; /* Increase space between input and button */
     border-radius: 5px; /* Rounded corners for the input field */
     margin-bottom: 40px;
+    
 }
 
 .paperInput {
     border: 1px solid #ccc; /* A light border for distinction */
     background-color: #f9f9f9; /* A slightly off-white background for the input field */
+    
 }
 
 .inputButton {
@@ -46,8 +52,12 @@ body {
     border: none; /* No border for a cleaner look */
     cursor: pointer;
     border-radius: 20px; /* Highly rounded corners for the button */
+    text-align: center;
+    justify-content: center;
 }
 
 .inputButton:hover {
     background-color: #aede56; /* A darker shade on hover for feedback */
+    text-align: center;
+    justify-content: center;
 }

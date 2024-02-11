@@ -1,6 +1,33 @@
 .sidebar-wrapper {
-    border-color: black;
-    border-style: solid;
+    border: 1px solid #d1d5db; /* Softer border color */
+    margin-left: 50px;
     width: 25vw;
     height: 100vh;
+    padding: 2rem; /* Add padding for internal spacing */
+    overflow-y: auto; /* Enables scrolling for long content */
+    background-color: #f9fafb; /* Light background color for contrast */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    font-family: 'Roboto', sans-serif; /* Consistent typography */
+}
+
+.sidebar-wrapper h2 {
+    color: #111827; /* Darker color for the title */
+    margin-bottom: 1rem; /* Space below the title */
+    font-size: 1.5rem; /* Larger font size for the title */
+}
+
+.sidebar-wrapper p {
+    color: #4b5563; /* Softer color for text */
+    line-height: 1.6; /* Improve readability */
+    margin-bottom: 1rem; /* Space between paragraphs */
+}
+
+/* If you have links or want parts to be interactive: */
+.sidebar-wrapper a {
+    color: #2563eb; /* Interactive color for links */
+    text-decoration: none; /* Optional: removes underline from links */
+}
+
+.sidebar-wrapper a:hover {
+    text-decoration: underline; /* Adds an underline on hover for links */
 }

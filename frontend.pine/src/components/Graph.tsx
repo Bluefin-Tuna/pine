@@ -1,8 +1,7 @@
-import React, { Component, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Tree from 'react-d3-tree';
 import clone from 'clone';
 import './Graph.css'
-
 
 const cleanData = (data: any) => {
     console.log(data)
@@ -19,12 +18,6 @@ const cleanData = (data: any) => {
     }
 }
 
-
-const handleNodeClick = (nodeDatum: any, event: any) => {
-    window.open(nodeDatum.data.uri);
-}
-
-// Function to fetch children for a node
 const fetchChildren = async (nodeId: any) => {
   try {
     const response = await fetch(`http://127.0.0.1:5000/add-children/${nodeId}`, { mode: "no-cors" });
@@ -37,36 +30,42 @@ const fetchChildren = async (nodeId: any) => {
     console.error("Failed to fetch children data:", error);
     return [];
   }
-}
+};
 
 export default function Graph({ data, onNodeHover }: { data: any, onNodeHover: (nodeData: any) => void }) {
   const [treeData, setTreeData] = useState(cleanData({data}));
+  const [translate, setTranslate] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const container = document.getElementById('graph-wrapper');
+    if (container) {
+      const dimensions = container.getBoundingClientRect();
+      setTranslate({
+        x: dimensions.width / 2.25,
+        y: dimensions.height / 2, // Adjust based on desired vertical position
+      });
+    }
+  }, []);
+
   const handleNodeClick = async (nodeDatum: any, event: any) => {
-    // Check if the node has no children and is not already fetching
     if (!nodeDatum.children && !nodeDatum._children) {
-      // Fetch children data
       const childrenData = await fetchChildren(nodeDatum.data.uuid);
       const cleanedChildrenData = childrenData.map(child => cleanData({data: child}));
-      console.log(cleanedChildrenData);
-      // Use clone to avoid directly mutating the state
       const clonedTreeData = clone(treeData);
-      // Find the node in your treeData and add the children
       const findAndAddChildren = (node: any) => {
         if (node.uuid === nodeDatum.data.uuid) {
-          node.children = cleanedChildrenData; // Assuming childrenData is an array of children
+          node.children = cleanedChildrenData;
         }
         if (node.children) {
           return node.children.some(findAndAddChildren);
         }
       };
-      console.log("Getting here")
       findAndAddChildren(clonedTreeData);
       setTreeData(clonedTreeData);
     }
     if (nodeDatum.data.uri) {
       window.open(nodeDatum.data.uri);
     }
-    // return true;
   };
 
   const handleNodeMouseOver = (nodeDatum: any, event: any) => {
@@ -74,9 +73,10 @@ export default function Graph({ data, onNodeHover }: { data: any, onNodeHover: (
   };
 
   return (
-    <div id="graph-wrapper" style={{ width: '75vw', height: '100vh', borderColor: 'black', borderStyle: 'solid' }}>
+    <div id="graph-wrapper" style={{ width: '75vw', height: '100vh', border: 'solid black' }}>
       <Tree
         data={treeData}
+        translate={translate}
         collapsible={false}
         onNodeClick={handleNodeClick}
         onNodeMouseOver={handleNodeMouseOver}
