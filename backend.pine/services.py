@@ -160,7 +160,6 @@ def add_child(child, parent_id=None, connection=None):
             "connection": connection,
         }
         mongo.db.papers.insert_one(paper_document)
-        print('here')
         return paper_document
     else:
         return {"message": "Failed to fetch child metadata"}
