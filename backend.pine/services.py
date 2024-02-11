@@ -176,6 +176,9 @@ def add_children(parent_uuid):
     from app import mongo
 
     parent_details = mongo.db.papers.find_one({"_id": parent_uuid})
+    if parent_details == None:
+        return "Invalid parent UUID"
+
     parent_title = parent_details["title"]
     parent_abstract = parent_details["abstract"]
 
