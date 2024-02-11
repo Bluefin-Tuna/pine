@@ -11,6 +11,7 @@ Flask = "2.2.5"
 Flask-PyMongo = "2.3.0"
 requests = "2.31.0"
 octoai-sdk = "0.9.0"
+flask-cors = "^4.0.0"
 
 
 [build-system]

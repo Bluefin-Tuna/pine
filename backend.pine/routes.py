@@ -21,7 +21,7 @@ def get_paper(id):
 
     # No need to convert _id to string, as it's already a string
     response = jsonify(paper)
-    response.headers.add('Access-Control-Allow-Origin', '*')
+    # response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
 @bp.route('/add-children', methods=['POST'])
