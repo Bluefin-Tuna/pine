@@ -28,11 +28,21 @@ const handleNodeClick = (nodeDatum: any, event: any) => {
 const fetchChildren = async (nodeId: any) => {
   console.log(nodeId);
   try {
-    const response = await fetch(`http://127.0.0.1:5000/get/676fa037866f4fb397a280cd1fdf57a5`, { mode: "no-cors" });
+
+    const data = { "uuid": "34e6def5b5e24d0ba30b23848885238c" }
+    const response = await fetch(`http://127.0.0.1:5000/add-children`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        mode: "no-cors"
+    });
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
     const childrenData = await response.json();
+    console.log(childrenData);
     return childrenData; // Ensure this data is in the format expected by react-d3-tree
   } catch (error) {
     console.error("Failed to fetch children data:", error);
@@ -48,7 +58,7 @@ export default function Graph( data: any, onNodeHover: any) {
     // Check if the node has no children and is not already fetching
     if (!nodeDatum.children && !nodeDatum._children) {
       // Fetch children data
-      const childrenData = fetchChildren(nodeDatum.data.uuid);
+      const childrenData = await fetchChildren(nodeDatum.data.uuid);
       console.log(childrenData);
       // Use clone to avoid directly mutating the state
       const clonedTreeData = clone(treeData);
