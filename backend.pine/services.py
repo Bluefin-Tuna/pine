@@ -181,7 +181,7 @@ def add_children(parent_uuid):
     parent_title = parent_details["title"]
     parent_abstract = parent_details["abstract"]
 
-    random_num = random.randint(2, 5)
+    random_num = random.randint(4, 6)
     children = find_similar_papers_by_title(parent_title, random_num)
     added_children = []
     for child in children:
@@ -195,4 +195,6 @@ def add_children(parent_uuid):
         )
         added_children.append(n)
 
-    return added_children
+    if len(added_children) > 1: added_children = [ac for ac in added_children if ac["title"] != parent_title]
+
+    return added_children if added_children else parent_details
