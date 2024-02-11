@@ -5,14 +5,14 @@ import clone from 'clone';
 
 const constructInitialData = (data: any) => {
     console.log("Data", data);
-    const name = data.data.data.title.length > 10 ? `${data.data.data.title.substring(0, 10)}...` : data.data.data.title;
+    const name = data.data.title.length > 10 ? `${data.data.title.substring(0, 10)}...` : data.data.title;
     return {
-        uuid: data.data.data.id,
+        uuid: data.data.id,
         name: name,
-        title: data.data.data.title,
-        authors: data.data.data.authors,
-        abstract: data.data.data.abstract,
-        uri: data.data.data.uri,
+        title: data.data.title,
+        authors: data.data.authors,
+        abstract: data.data.abstract,
+        uri: data.data.uri,
         connection: null,
         children: []
     }
@@ -21,23 +21,14 @@ const constructInitialData = (data: any) => {
 const handleNodeClick = (nodeDatum: any, event: any) => {
     console.log("Node", nodeDatum)
     window.open(nodeDatum.data.uri);
-
 }
 
 // Function to fetch children for a node
 const fetchChildren = async (nodeId: any) => {
   console.log(nodeId);
   try {
-
-    const data = { "uuid": "34e6def5b5e24d0ba30b23848885238c" }
-    const response = await fetch(`http://127.0.0.1:5000/add-children`, {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-        mode: "no-cors"
-    });
+    const response = await fetch(`http://127.0.0.1:5000/add-children/${nodeId}`, { mode: "no-cors" });
+    console.log(response);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -50,7 +41,8 @@ const fetchChildren = async (nodeId: any) => {
   }
 }
 
-export default function Graph( data: any, onNodeHover: any) {
+export default function Graph({ data, onNodeHover }: { data: any, onNodeHover: (nodeData: any) => void }) {
+  console.log(onNodeHover);
   const [treeData, setTreeData] = useState(constructInitialData({data}));
 
   const handleNodeClick = async (nodeDatum: any, event: any) => {

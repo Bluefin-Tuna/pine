@@ -27,10 +27,8 @@ def get_paper(id):
     return response
 
 
-@bp.route("/add-children", methods=["GET"])
-def addchildren():
-    data = request.json
-    uuid = data.get("uuid")
+@bp.route("/add-children/<uuid>", methods=["GET"])
+def addchildren(uuid):
     result = add_children(uuid)
     response = jsonify(result)
     response.headers.add("Access-Control-Allow-Origin", "*")
