@@ -5,15 +5,16 @@ import clone from 'clone';
 
 const constructInitialData = (data: any) => {
     console.log("Data", data);
-    const name = data.data.title.length > 10 ? `${data.data.title.substring(0, 10)}...` : data.data.title;
+    const name = data.data.data.title.length > 10 ? `${data.data.data.title.substring(0, 10)}...` : data.data.data.title;
     return {
-        uuid: data.data.id,
+        uuid: data.data.data.id,
         name: name,
-        title: data.data.title,
-        authors: data.data.authors,
-        abstract: data.data.abstract,
-        uri: data.data.uri,
-        connection: null
+        title: data.data.data.title,
+        authors: data.data.data.authors,
+        abstract: data.data.data.abstract,
+        uri: data.data.data.uri,
+        connection: null,
+        children: []
     }
 }
 
@@ -27,7 +28,7 @@ const handleNodeClick = (nodeDatum: any, event: any) => {
 const fetchChildren = async (nodeId: any) => {
   console.log(nodeId);
   try {
-    const response = await fetch(`YOUR_BACKEND_ENDPOINT/${nodeId}`);
+    const response = await fetch(`YOUR_BACKEND_ENDPOINT/${nodeId}`, { mode: "no-cors" });
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -47,12 +48,7 @@ export default function Graph( data: any, onNodeHover: any) {
     // Check if the node has no children and is not already fetching
     if (!nodeDatum.children && !nodeDatum._children) {
       // Fetch children data
-      const res = await fetch(`http://127.0.0.1:5000/`, { mode: "no-cors" });
-      console.log(res);
-      if (!res.ok) {
-        console.log("Couldn't get child");
-      }
-      const childrenData = await res.json()
+      const childrenData = fetchChildren(nodeDatum.data.uuid);
       console.log(childrenData);
       // Use clone to avoid directly mutating the state
       const clonedTreeData = clone(treeData);
