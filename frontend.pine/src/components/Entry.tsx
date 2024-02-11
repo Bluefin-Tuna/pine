@@ -6,10 +6,10 @@ export default function Entry() {
   const [input, setInput] = useState('');
   const id = useId();
   // @ts-ignore
-  const { setName } = useContext(NameContext);
+  const { setName: setPaper } = useContext(NameContext);
   async function onClick () {
     //POST with arxiv link
-
+    let paper_id: string;
     const response = async () => {
       const req = await fetch('http://127.0.0.1:5000/add', {
           method: 'POST',
@@ -20,10 +20,20 @@ export default function Entry() {
         }
       );
       const json = await req.json();
-      console.log(json);
-      setName(input);
+      paper_id = json["paper_id"];
     }
     await response();
+
+    const getFromID = async () => {
+      const req = await fetch('http://127.0.0.1:5000/get/' + paper_id, {
+          method: 'GET',
+        }
+      );
+      const json = await req.json();
+      console.log(json);
+      setPaper(json);
+    }
+    await getFromID();
   }
     return (
       <div className="entry-wrapper">

@@ -36,4 +36,3 @@ completion = client.chat.completions.create(
 )
 
 content = completion.dict()['choices'][0]['message']['content'].strip()
-print(content)

@@ -7,7 +7,9 @@ export default function Metadata() {
   const {name} = useContext(NameContext);
     return (
         <div className="sidebar-wrapper">
-            Hello {name}
+          <h1>{name != null && name['title']} </h1>
+          <h2>{name != null && name['authors'].join(" ")}</h2>
+          <p> {name != null && name['abstract']}</p>
         </div>
     );
 }
