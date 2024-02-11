@@ -113,7 +113,7 @@ def fetch_and_store_paper(paper_name, parent_id=None, connection=None):
             "connection": connection,
         }
         mongo.db.papers.insert_one(paper_document)
-        return {"message": "Paper stored successfully", "doc": paper_document}
+        return paper_document
     else:
         return {"message": "Failed to fetch paper metadata"}
 
