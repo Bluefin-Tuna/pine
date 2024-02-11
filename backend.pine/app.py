@@ -9,7 +9,7 @@ app.config["MONGO_URI"] = "mongodb+srv://new:new@cluster0.otzl1xs.mongodb.net/te
 mongo = PyMongo(app)
 
 # Register blueprints
-app.register_blueprint(paper_bp, url_prefix='/papers')
+app.register_blueprint(paper_bp, url_prefix='/')
 
 if __name__ == '__main__':
     app.run(debug=True)
