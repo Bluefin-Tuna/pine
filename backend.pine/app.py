@@ -6,7 +6,7 @@ from routes import bp as paper_bp
 app = Flask(__name__)
 
 CORS(app)
-app.config["MONGO_URI"] = "mongodb+srv://new:new@cluster0.otzl1xs.mongodb.net/test?retryWrites=true&w=majority"
+app.config["MONGO_URI"] = "INSERT_URI_HERE"
 
 mongo = PyMongo(app)
 
