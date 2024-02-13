@@ -8,7 +8,7 @@ import random
 
 from octoai.client import Client
 
-ss_api_key = "9RgMpk4pid9xVnigSzo5SaQWq5nb202J7turPVPQ"
+ss_api_key = "INSERT_KEY_HERE"
 
 
 def fetch_paper_details(title):
