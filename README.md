@@ -1,5 +1,7 @@
 # Pineroot: Explore Research Efficiently
 
+Check it out [here](https://devfolio.co/projects/pine-012d)
+
 ## Problem:
 As student researchers, we often have to independently learn advanced topics at a rapid pace, 
 I can help or help you. But with dozens of citations per paper and topics that we are vaguely familiar with, we are often confused on what reference we should look to next to best improve our understanding of the topic. We might pick a paper based on a friend’s interest, or maybe pick a reference solely based on its author or title. Existing LLM-based methods have the potential to hallucinate false information and nonexistent papers. We hope to save valuable time and provide more relevant results by pointing researchers to the most critical research papers to further their understanding of the topic they are exploring. Instead of blindly guessing what reference they should look at next, our application uses RAG to analyze all relevant citations of the current paper and succinctly explains to the user which papers are the most relevant to their interests in an intuitive interface.
